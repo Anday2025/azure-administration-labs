@@ -1,79 +1,36 @@
+## Skjermbilder
 
-# Azure Bicep Storage Lab
+### 1. Bicep-kode
+Bicep-malen definerer Storage Account, parametere, ressursmerking og sikkerhetsinnstillinger.
 
-Praktisk Azure-prosjekt der jeg bruker Infrastructure as Code (IaC) med Bicep og Azure CLI til å opprette, konfigurere og oppdatere en Azure Storage Account.
+![Bicep-kode](screenshots/01-bicep-code.png)
 
-## Teknologier
+### 2. Bicep Build
+Bicep-filen kompileres til en ARM-mal (`main.json`) med Azure CLI.
 
-- Microsoft Azure
-- Azure Bicep
-- Azure CLI
-- Azure Resource Manager (ARM)
-- Azure Cloud Shell (Bash)
+![Bicep Build](screenshots/02-bicep-build.png)
 
-## Hva jeg har gjennomført
+### 3. Validering
+Azure validerer malen før utrulling. Resultatet viser `Succeeded`.
 
-1. Opprettet en Bicep-fil (`main.bicep`).
-2. Kompilert Bicep-koden med Azure CLI.
-3. Validert utrullingen mot Azure.
-4. Brukt What-If for å forhåndsvise endringer.
-5. Opprettet en Storage Account med Bicep.
-6. Kontrollert sikkerhetsinnstillingene i Azure Portal.
-7. Oppdatert ressursen med taggen `Environment = Learning`.
-8. Kontrollert idempotens med What-If.
+![Bicep Validation](screenshots/03-bicep-validation.png)
 
-## Konfigurasjon
+### 4. What-If
+What-If sammenligner Bicep-koden med eksisterende Azure-ressurser uten å endre dem. Resultatet viser `1 no change, 4 to ignore`.
 
-| Innstilling | Verdi |
-|---|---|
-| Region | Norway East |
-| Performance | Standard |
-| Redundancy | LRS |
-| Account kind | StorageV2 |
-| Secure transfer | Enabled |
-| Anonymous Blob access | Disabled |
-| Shared Key access | Disabled |
-| Minimum TLS | TLS 1.2 |
+![Bicep What-If](screenshots/04-bicep-what-if.png)
 
-## Azure CLI-kommandoer
+### 5. Utrulling
+Utrullingen ble gjennomført med Azure CLI. Resultatet viser `Succeeded`.
 
-### Kompilere Bicep
-```bash
-az bicep build --file main.bicep
-```
+![Bicep Deployment](screenshots/05-bicep-deployment.png)
 
-### Validere utrulling
-```bash
-az deployment group validate \
-  --resource-group AzureLab \
-  --template-file main.bicep \
-  --parameters storageAccountName=stbicepanday2026
-```
+### 6. Storage Account Overview
+Lagringskontoen er opprettet i Norway East med Standard_LRS, StorageV2 og taggen `Environment: Learning`.
 
-### Forhåndsvise endringer
-```bash
-az deployment group what-if \
-  --resource-group AzureLab \
-  --template-file main.bicep \
-  --parameters storageAccountName=stbicepanday2026
-```
+![Storage Account Overview](screenshots/06-storage-account-overview.png)
 
-### Gjennomføre utrulling
-```bash
-az deployment group create \
-  --resource-group AzureLab \
-  --template-file main.bicep \
-  --parameters storageAccountName=stbicepanday2026
-```
+### 7. Sikkerhetsinnstillinger
+HTTPS er påkrevd, anonym Blob-tilgang og Shared Key-tilgang er deaktivert, og minimum TLS-versjon er 1.2.
 
-## Resultat
-
-Jeg har opprettet og oppdatert en Azure Storage Account ved hjelp av Bicep og Azure CLI.
-
-Etter utrullingen kontrollerte jeg sikkerhetsinnstillingene i Azure Portal.
-
-En ny What-If-kjøring viste `NoChange` for lagringskontoen, som bekreftet at konfigurasjonen allerede samsvarte med Bicep-filen.
-
-## Kostnadskontroll
-
-Prosjektet bruker Azure for Students. Jeg har opprettet et kostnadsbudsjett med varsler og planlegger å slette testressursen etter at øvelsen er dokumentert.
+![Storage Security](screenshots/07-storage-security.png)
