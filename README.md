@@ -15,6 +15,7 @@ Målet er å bygge og dokumentere praktisk erfaring med å konfigurere, administ
 | Prosjekt | Innhold | Status |
 |---|---|---|
 | [01 – Azure Storage](01-azure-storage/README.md) | Blob Storage, Azure RBAC, nettverkssikkerhet, Azure Monitor og kostnadskontroll | Gjennomført |
+| [02 – Bicep Storage Lab](02-bicep-storage-lab/README.md) | Bicep, Azure CLI, Infrastructure as Code, What-If og automatisert utrulling | Gjennomført |
 
 Nye prosjekter legges til fortløpende etter hvert som de blir gjennomført.
 
